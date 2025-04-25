@@ -13,10 +13,12 @@ qt_add_executable(
 
     main.cpp
 
-    frontend/src/main-window.cpp
-    frontend/src/board-widget.cpp
+    frontend/include/menu-widget.h
+    frontend/src/menu-widget.cpp
     frontend/include/main-window.h
-    frontend/include/board-widget.h
+    frontend/src/main-window.cpp
+    frontend/include/game-board-widget.h
+    frontend/src/game-board-widget.cpp
 
     backend/src/game-logic.cpp
     backend/src/alpha-beta-ai.cpp

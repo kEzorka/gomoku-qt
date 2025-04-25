@@ -1,37 +1,45 @@
 #pragma once
+
 #include <vector>
 #include <utility>
 
-class GameLogic
-{
+/*
+  Класс GameLogic отвечает за игровую логику.
+  Он содержит игровое поле (массив board), методы для проверки и выполнения ходов,
+  удаления хода (undo), проверки выигрыша и возвращения списка доступных ходов.
+*/
+class GameLogic {
 public:
-    static const int BOARD_SIZE = 15;
+    static const int BOARD_SIZE = 15; // Размер игрового поля (15x15)
+
+    // Определение игроков и пустой клетки
     enum Player {
-        None = 0,
-        Human = 1,
-        AI = 2
+        None = 0,   // Пустая клетка
+        Human = 1,  // Игрок-человек
+        AI = 2      // Компьютер (бот)
     };
 
+    // Конструктор: инициализирует игровое поле значением None.
     GameLogic();
 
-    // Returns whether the cell at (row, col) is empty
+    // Проверка, является ли ход по координатам (row, col) допустимым.
     bool isMoveValid(int row, int col) const;
 
-    // Places a move for the given player; returns false if invalid
+    // Выполнение хода для заданного игрока. Если ход не допустим, возвращает false.
     bool makeMove(int row, int col, Player player);
 
-    // Undoes a move at (row, col)
+    // Отмена хода на указанной клетке.
     void undoMove(int row, int col);
 
-    // Checks whether the last move made by 'player' produced a win
+    // Проверка, выиграл ли игрок, сделав ход в (row, col).
     bool checkWin(int row, int col, Player player) const;
 
-    // Checks the entire board for a winner; returns None if no winner
+    // Проверка всего поля на наличие победителя, возвращает игрока, если кто-то выиграл, иначе None.
     int checkWinner() const;
 
-    // Returns a list of all available moves (row, col)
+    // Возвращает список доступных ходов в виде вектора пар (row, col).
     std::vector<std::pair<int, int>> getAvailableMoves() const;
 
-    // Public board state; board[row][col] holds None, Human, or AI.
+    // Игровое поле: двумерный массив, где записаны номера игроков или None.
     int board[BOARD_SIZE][BOARD_SIZE];
 };
